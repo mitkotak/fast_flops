@@ -1,10 +1,10 @@
 # Fast FLOPS
 
-Ever needed to report FLOPs for your Torch/JAX code. We got you covered ! (More importantly, here's a survey on [why bunnies flop](https://bunnyasapet.com/why-do-rabbits-flop/))
+Ever needed to report FLOPs for your Torch/JAX code. We got you covered ! (More importantly, here's a survey on [why bunnies flop](https://rabbit.org/behavior/reading-your-rabbits-behavior/))
 
 Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-hackathon-2020
 
-<img src="./logo/fast_flops_tuong.jpeg" alt="bunny" width="500"/> 
+<img src="./logo/fast_flops_tuong.jpeg" alt="bunny" width="300"/> 
 (Image Credit: Tuong Phung)
 
 ## Workflow (Warning: Extremely clunky right now)
