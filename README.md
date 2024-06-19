@@ -1,6 +1,8 @@
-# Fantastic FLOPS
+# Fast FLOPS
 
-Ever needed to report FLOPs for your Torch/JAX code. We got you covered !
+![bunny_flops](./logo/fast_flops_tuong.jpeg)
+
+Ever needed to report FLOPs for your Torch/JAX code. We got you covered ! (On a side note, here's a brief survey on [why bunnies flop](https://bunnyasapet.com/why-do-rabbits-flop/))
 
 Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-hackathon-2020
 
@@ -31,7 +33,7 @@ Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-h
 - Wrap the function in the `flops_counter` decorator
     
     ```python
-    from fantastic_flops import func_flops
+    from fast_flops import func_flops
 
     @flops_counter
     def func_flops(func, x, y):

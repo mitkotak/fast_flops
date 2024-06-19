@@ -2,7 +2,7 @@ import jax
 import jax.numpy as jnp
 import time
 import numpy as np
-from fantastic_flops import flops_counter
+from fast_flops import flops_counter
 
 SIZE = 500
 
