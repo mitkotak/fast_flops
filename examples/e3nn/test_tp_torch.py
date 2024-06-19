@@ -24,12 +24,10 @@ y = irreps.randn(args.batch, -1).to(device='cuda')
 
 tp = o3.experimental.FullTensorProductv2(irreps, irreps).to(device='cuda')
 
-def func(x, y):
-    return tp(x, y)
 
 @flops_counter
 def func_flops(func, x, y):
     return func(x, y)
 
-func = torch.compile(func, mode="max-autotune", fullgraph=True)
-func_flops(func, x, y)
+tp = torch.compile(tp, mode="max-autotune", fullgraph=True)
+func_flops(tp, x, y)
