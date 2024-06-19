@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 import sys
 
@@ -19,17 +20,20 @@ metrics += "sm__inst_executed_pipe_tensor.sum,"
 # DRAM, L2 and L1
 metrics += "dram__bytes.sum,lts__t_bytes.sum,l1tex__t_bytes.sum"
 
-# Check if an input file is provided
-if len(sys.argv) < 2:
-    print(f"Usage: {sys.argv[0]} <input_file>")
-    sys.exit(1)
+parser = argparse.ArgumentParser(description='Run a Python script with profiling')
+parser.add_argument('input_file', help='Path to the input Python file')
+parser.add_argument('args', nargs=argparse.REMAINDER, help='Arguments to pass to the input file')
 
-input_file = sys.argv[1]
+args = parser.parse_args()
+
+input_file = args.input_file
+input_args = ' '.join(args.args)
 output_file = "output.csv"
 profile_str = f"ncu --nvtx --nvtx-include \"profile\" --metrics {metrics} --csv --print-units base"
 
+print(f"{input_args}")
 try:
-    subprocess.run(f"{profile_str} python {input_file} > {output_file}", shell=True, check=True)
+    subprocess.run(f"{profile_str} python {input_file} {input_args} > {output_file}", shell=True, check=True)
 except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
     sys.exit(1)
