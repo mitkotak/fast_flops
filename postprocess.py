@@ -1,9 +1,14 @@
+import argparse
 import os
 import numpy as np
 import pandas as pd
 
 datadir='.'
-files=[x for x in os.listdir(datadir) if x.endswith('.csv') and x.startswith('output')]
+parser = argparse.ArgumentParser(description='Run a Python script with profiling')
+parser.add_argument('csv_file', type=str, default='output', help='Path to the CSV file')
+args = parser.parse_args()
+
+files=[x for x in os.listdir(datadir) if x.endswith('.csv') and x.startswith(args.csv_file)]
 files.sort()
 files=[os.path.join(datadir,file) for file in files]
 dfs={}
@@ -57,3 +62,5 @@ for file in files:
 print("Measured Time:", sum(dfmetric['Time'].to_list()))
 print("Measured GFLOP/s:", sum(dfmetric['GFLOP/s'].to_list()))
 print("Measured FLOPS:", sum(dfmetric['all FLOPs'].tolist()))
+print("Measured TC GFLOP/s:", sum(dfmetric['TC GFLOP/s'].to_list()))
+print("Measured TC GFLOP/s:", sum(dfmetric['TC FLOPs'].to_list()))

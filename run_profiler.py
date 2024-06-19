@@ -22,16 +22,17 @@ metrics += "dram__bytes.sum,lts__t_bytes.sum,l1tex__t_bytes.sum"
 
 parser = argparse.ArgumentParser(description='Run a Python script with profiling')
 parser.add_argument('input_file', help='Path to the input Python file')
+parser.add_argument('csv_file', help='Path to the output csv file')
 parser.add_argument('args', nargs=argparse.REMAINDER, help='Arguments to pass to the input file')
 
 args = parser.parse_args()
 
 input_file = args.input_file
+output_file = args.csv_file
 input_args = ' '.join(args.args)
-output_file = "output.csv"
 profile_str = f"ncu --nvtx --nvtx-include \"profile\" --metrics {metrics} --csv --print-units base"
 
-print(f"{input_args}")
+print(input_args)
 try:
     subprocess.run(f"{profile_str} python {input_file} {input_args} > {output_file}", shell=True, check=True)
 except subprocess.CalledProcessError as e:
