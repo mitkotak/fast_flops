@@ -38,7 +38,10 @@ for file in files:
                                 + dfmetric['sm__sass_thread_inst_executed_op_hmul_pred_on.sum'] \
                                 + dfmetric['sm__sass_thread_inst_executed_op_hadd_pred_on.sum'] 
 
-        dfmetric['TC FLOPs']= 512 * dfmetric['sm__inst_executed_pipe_tensor.sum'] # Don't know where that 512 is coming from
+        MAGIC_NUMBER = 2048 # Ampere
+        # MAGIC_NUMBER = 512 # Turing
+
+        dfmetric['TC FLOPs']= MAGIC_NUMBER * dfmetric['sm__inst_executed_pipe_tensor.sum'] # Don't know where that 512 is coming from
         dfmetric['all FLOPs']= dfmetric['CC FLOPs'] + dfmetric['TC FLOPs']
 
         dfmetric['AI HBM'] = dfmetric['all FLOPs'].div(dfmetric['dram__bytes.sum'])
