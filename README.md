@@ -4,7 +4,7 @@ Ever needed to report FLOPs for your Torch/JAX code. We got you covered !
 
 Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-hackathon-2020
 
-## Workflow (Warning: Extremeley clunky right now)
+## Workflow (Warning: Extremely clunky right now)
 
 - Define your function that you wanna profile
 
