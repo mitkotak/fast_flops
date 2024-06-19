@@ -14,11 +14,11 @@ torch.backends.cudnn.enabled = True
 
 SIZE = 500
 
-x = torch.randn(SIZE, SIZE).to(device='cuda')
-y = torch.randn(SIZE, SIZE).to(device='cuda')
+x = torch.randn(SIZE).to(device='cuda')
+y = torch.randn(SIZE).to(device='cuda')
 
 def func(x, y):
-    return torch.einsum("ij,jk->ik", x, y)
+    return torch.einsum("i,j->", x, y)
 
 @flops_counter
 def func_flops(func, x, y):
@@ -27,5 +27,3 @@ def func_flops(func, x, y):
 
 func = torch.compile(func, fullgraph=True, mode='max-autotune')
 func_flops(func, x, y)
-
-
