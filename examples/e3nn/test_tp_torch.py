@@ -1,3 +1,4 @@
+import argparse
 import torch
 # Borrowed from https://github.com/pytorch-labs/gpt-fast/blob/db7b273ab86b75358bd3b014f1f022a19aba4797/generate.py#L16-L18
 torch.set_float32_matmul_precision('high')
@@ -11,12 +12,15 @@ from e3nn import o3
 import numpy as np
 from fantastic_flops import flops_counter
 
-SIZE = 500
-LMAX = 4
+parser = argparse.ArgumentParser(description='Tensor product calculation')
+parser.add_argument('--lmax', type=int, default=2, help='max_ell')
+parser.add_argument('--batch', type=int, default=1, help='batch size')
 
-irreps = o3.Irreps.spherical_harmonics(LMAX)
-x = irreps.randn(SIZE, -1).to(device='cuda')
-y = irreps.randn(SIZE, -1).to(device='cuda')
+args = parser.parse_args()
+irreps = o3.Irreps.spherical_harmonics(args.lmax)
+
+x = irreps.randn(args.batch, -1).to(device='cuda')
+y = irreps.randn(args.batch, -1).to(device='cuda')
 
 tp = o3.experimental.FullTensorProductv2(irreps, irreps).to(device='cuda')
 
