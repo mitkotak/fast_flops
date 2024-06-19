@@ -53,7 +53,7 @@ Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-h
 
 - The pipeline can be executed using
     ```bash
-    bash run_profiler.sh test_matmul_torch.py && python postprocess.py
+    python run_profiler.py examples/matmul/test_matmul_torch.py && python postprocess.py
     ```
   with the output looking something like
 

@@ -50,23 +50,10 @@ for file in files:
 
         dfmetric['GFLOP/s'] = dfmetric['all FLOPs']/ dfmetric['Time'] /1024/1024/1024
         dfmetric['TC GFLOP/s'] = dfmetric['TC FLOPs']/ dfmetric['Time'] /1024/1024/1024
-#         dfmetric.to_csv('pd_'+tag+'.csv')
+        dfmetric.to_csv('pd_'+tag+'.csv')
         dfs[tag]=dfmetric
 
 
 print("Measured Time:", sum(dfmetric['Time'].to_list()))
 print("Measured GFLOP/s:", sum(dfmetric['GFLOP/s'].to_list()))
 print("Measured FLOPS:", sum(dfmetric['all FLOPs'].tolist()))
-# tags=dfs.keys()
-# flags=['HBM'] #'HBM','L2','L1' or 'all'
-# for tag in tags:
-#     for flag in flags:
-#         dfm=dfs[tag]
-#         LABELS = dfm.index.tolist()
-#         AIL1   = dfm['AI L1'].tolist()
-#         AIL2   = dfm['AI L2'].tolist()
-#         AIHBM  = dfm['AI HBM'].tolist()
-#         FLOPS  = dfm['GFLOP/s'].tolist()
-
-#         roofline(tag, FLOPS, AIHBM, AIL2, AIL1, LABELS, flag)
-
