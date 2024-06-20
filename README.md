@@ -1,4 +1,5 @@
 # Fast FLOPS
+### ... and where to find them 🐇 
 
 Ever needed to report FLOPs for your Torch/JAX code. We got you covered ! (More importantly, here's a survey on [why bunnies flop](https://rabbit.org/behavior/reading-your-rabbits-behavior/))
 
