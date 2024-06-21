@@ -18,7 +18,7 @@ metrics += "sm__sass_thread_inst_executed_op_hadd_pred_on.sum,sm__sass_thread_in
 metrics += "sm__inst_executed_pipe_tensor.sum,"
 
 # DRAM, L2 and L1
-metrics += "dram__bytes.sum,lts__t_bytes.sum,l1tex__t_bytes.sum"
+metrics += "dram__bytes.sum,lts__t_bytes.sum,l1tex__t_bytes.sum,l1tex__t_sectors_srcunit_tex_lookup_hit.sum,l1tex__t_sectors_srcunit_tex_lookup_hit.sum,l1tex__t_sectors_srcunit_tex_lookup_miss.sum"
 
 parser = argparse.ArgumentParser(description='Run a Python script with profiling')
 parser.add_argument('input_file', help='Path to the input Python file')
