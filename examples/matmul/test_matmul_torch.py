@@ -25,7 +25,6 @@ def func_flops(func, x, y):
     return func(x, y)
 
 
-func = torch.compile(func, fullgraph=True, mode='max-autotune')
+func = torch.compile(func, fullgraph=True)
 func_flops(func, x, y)
-
 

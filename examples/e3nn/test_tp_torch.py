@@ -29,5 +29,5 @@ tp = o3.experimental.FullTensorProductv2(irreps, irreps).to(device='cuda')
 def func_flops(func, x, y):
     return func(x, y)
 
-tp = torch.compile(tp, mode="max-autotune", fullgraph=True)
+tp = torch.compile(tp, mode="max-autotune", fullgraph=True).to(device='cuda')
 func_flops(tp, x, y)

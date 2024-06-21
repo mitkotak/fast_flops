@@ -52,15 +52,13 @@ for file in files:
         dfmetric['AI HBM'] = dfmetric['all FLOPs'].div(dfmetric['dram__bytes.sum'])
         dfmetric['AI L2'] = dfmetric['all FLOPs'].div(dfmetric['lts__t_bytes.sum'])
         dfmetric['AI L1'] = dfmetric['all FLOPs'].div(dfmetric['l1tex__t_bytes.sum'])
-
         dfmetric['GFLOP/s'] = dfmetric['all FLOPs']/ dfmetric['Time'] /1024/1024/1024
         dfmetric['TC GFLOP/s'] = dfmetric['TC FLOPs']/ dfmetric['Time'] /1024/1024/1024
         dfmetric.to_csv('pd_'+tag+'.csv')
         dfs[tag]=dfmetric
 
-
 print("Measured Time:", sum(dfmetric['Time'].to_list()))
 print("Measured GFLOP/s:", sum(dfmetric['GFLOP/s'].to_list()))
 print("Measured FLOPS:", sum(dfmetric['all FLOPs'].tolist()))
 print("Measured TC GFLOP/s:", sum(dfmetric['TC GFLOP/s'].to_list()))
-print("Measured TC GFLOP/s:", sum(dfmetric['TC FLOPs'].to_list()))
+print("Measured TC FLOP/s:", sum(dfmetric['TC FLOPs'].to_list()))
