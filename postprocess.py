@@ -41,24 +41,30 @@ for file in files:
                                 + dfmetric['sm__sass_thread_inst_executed_op_fadd_pred_on.sum'] \
                                 + 2 * dfmetric['sm__sass_thread_inst_executed_op_hfma_pred_on.sum'] \
                                 + dfmetric['sm__sass_thread_inst_executed_op_hmul_pred_on.sum'] \
-                                + dfmetric['sm__sass_thread_inst_executed_op_hadd_pred_on.sum'] 
+                                + dfmetric['sm__sass_thread_inst_executed_op_hadd_pred_on.sum']
 
         MAGIC_NUMBER = 2048 # Ampere
         # MAGIC_NUMBER = 512 # Turing
 
-        dfmetric['TC FLOPs']= MAGIC_NUMBER * dfmetric['sm__inst_executed_pipe_tensor.sum'] # Don't know where that 512 is coming from
+        dfmetric['TC FLOPs']= MAGIC_NUMBER * dfmetric['sm__inst_executed_pipe_tensor.sum']
+        # Don't know where that 512 is coming from
         dfmetric['all FLOPs']= dfmetric['CC FLOPs'] + dfmetric['TC FLOPs']
 
         dfmetric['AI HBM'] = dfmetric['all FLOPs'].div(dfmetric['dram__bytes.sum'])
         dfmetric['AI L2'] = dfmetric['all FLOPs'].div(dfmetric['lts__t_bytes.sum'])
         dfmetric['AI L1'] = dfmetric['all FLOPs'].div(dfmetric['l1tex__t_bytes.sum'])
-        dfmetric['GFLOP/s'] = dfmetric['all FLOPs']/ dfmetric['Time'] /1024/1024/1024
-        dfmetric['TC GFLOP/s'] = dfmetric['TC FLOPs']/ dfmetric['Time'] /1024/1024/1024
-        dfmetric.to_csv('pd_'+tag+'.csv')
+        dfmetric['all GFLOPs'] = dfmetric['all FLOPs'] /1024/1024/1024
+        dfmetric['GFLOP/s'] = dfmetric['all GFLOPs']/ dfmetric['Time']
+        dfmetric['TC GFLOPs'] = dfmetric['TC FLOPs'] /1024/1024/1024
+        dfmetric['TC GFLOP/s'] = dfmetric['TC GFLOPs']/ dfmetric['Time']
+        #dfmetric.to_csv('pd_'+tag+'.csv')
         dfs[tag]=dfmetric
 
 print("Measured Time:", sum(dfmetric['Time'].to_list()))
-print("Measured GFLOP/s:", sum(dfmetric['GFLOP/s'].to_list()))
-print("Measured FLOPS:", sum(dfmetric['all FLOPs'].tolist()))
+print("Measured GFLOPs:", sum(dfmetric['all GFLOPs'].to_list()))
+print("Measured GFLOP/s:", sum(dfmetric['GFLOP/s'].tolist()))
 print("Measured TC GFLOP/s:", sum(dfmetric['TC GFLOP/s'].to_list()))
-print("Measured TC FLOP/s:", sum(dfmetric['TC FLOPs'].to_list()))
+print("Measured TC GFLOPs:", sum(dfmetric['TC GFLOPs'].to_list()))
+print("Measured DRAM GB:", dfmetric['dram__bytes.sum'] /1024/1024/1024)
+print("Measured L1 GB:", dfmetric['lts__t_bytes.sum'] /1024/1024/1024)
+print("Measured L2 GB:", dfmetric['l1tex__t_bytes.sum'] /1024/1024/1024)
