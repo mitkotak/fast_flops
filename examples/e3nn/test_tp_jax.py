@@ -12,8 +12,9 @@ parser.add_argument('--batch', type=int, default=1, help='batch size')
 
 args = parser.parse_args()
 
-x = e3nn.normal(e3nn.s2_irreps(args.lmax), jax.random.PRNGKey(0), (args.batch, ))
-y = e3nn.normal(e3nn.s2_irreps(args.lmax), jax.random.PRNGKey(1), (args.batch, ))
+input_irreps = e3nn.Irreps([f"{l}e" for l in range(args.lmax + 1)])
+x = e3nn.normal(input_irreps, jax.random.PRNGKey(0), (args.batch, ))
+y = e3nn.normal(input_irreps, jax.random.PRNGKey(1), (args.batch, ))
 
 def func(x, y):
     return e3nn.tensor_product(x, y)

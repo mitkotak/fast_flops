@@ -6,7 +6,8 @@ import torch._dynamo.config
 import torch._inductor.config
 torch._inductor.config.coordinate_descent_tuning = True
 torch._inductor.config.triton.unique_kernel_names = True
-                
+from torch._inductor.utils import print_performance
+
 import time
 from e3nn import o3
 import numpy as np
@@ -29,5 +30,9 @@ tp = o3.experimental.FullTensorProductv2(irreps, irreps).to(device='cuda')
 def func_flops(func, x, y):
     return func(x, y)
 
+# When triton is enabled
 tp = torch.compile(tp, mode="max-autotune", fullgraph=True).to(device='cuda')
+# When halide is enabled
+#tp = torch.compile(tp, options={"cuda_backend": "halide"}, fullgraph=True).to(device='cuda')
+#print_performance(lambda: func_flops(tp, x, y))
 func_flops(tp, x, y)

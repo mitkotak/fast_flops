@@ -1,7 +1,7 @@
 import torch
 import time
 import numpy as np
-from fantastic_flops import flops_counter
+from fast_flops import flops_counter
 
 # Borrowed from https://github.com/pytorch-labs/gpt-fast/blob/db7b273ab86b75358bd3b014f1f022a19aba4797/generate.py#L16-L18
 torch.set_float32_matmul_precision('high')
