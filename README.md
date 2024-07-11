@@ -67,3 +67,10 @@ Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-h
   Measured FLOPS: 67108864.0
   ```
 
+
+## TODOs
+
+- [ ] Only turn on ncu during the hot loop in addition to nvtx
+- [ ] Axe run_profiler.py and postprocess.py. Ideally should work with python decorated_file.py
+- [ ] Plotting utilieis and csv plumbing
+
