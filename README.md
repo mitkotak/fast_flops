@@ -5,6 +5,8 @@ Ever needed to report FLOPs for your Torch/JAX code. We got you covered ! (More 
 
 Borrowed from https://gitlab.com/NERSC/roofline-on-nvidia-gpus/-/tree/roofline-hackathon-2020
 
+[Nsight Compute](https://developer.nvidia.com/nsight-compute) installation needed. Make sure the GPU counters are [enabled](https://developer.nvidia.com/ERR_NVGPUCTRPERM)
+
 <img src="./logo/fast_flops_tuong.jpeg" alt="bunny" width="300"/> 
 (Image Credit: Tuong Phung)
 
